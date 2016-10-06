@@ -96,8 +96,6 @@ This folder has the following structure ( Only folders that have been modified w
  -  `gulpfile.js` ( Gulp CLI tasks )
  -  `package.json` ( NodeJS NPM package list)
 
-
-
 ##Installing Dependencies
 This app requires some dependencies to run properly, Express is on of them.
 To install all dependecies run the following in your bash , inside the project root folder:
@@ -127,8 +125,6 @@ And finaly open the following url in your browser
  - [http://localhost:3000][localhost]
 
 Please notice that your firewall may block this communication, allow communications on the port 3000.
-
-
 
 
 ##WebSite Development Notes
