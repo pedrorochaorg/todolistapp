@@ -1,0 +1,146 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.container-fluid{
+  padding-top: 30px;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+
+.verde {
+  font-weight: bold;
+  background-color: #00FF90 !important;
+}
+
+.azul {
+  font-weight: bold;
+  background-color: #4600FF !important;
+  color: #FFFFFF !important;
+}
+
+.vermelho {
+  font-weight: bold;
+  background-color: #FF2500 !important;
+}
+
+.todoItem {
+
+  display: table;
+  vertical-align: bottom;
+  width: 100%;
+
+  .todoItemRow {
+    display: table-row;
+    width: 100%;
+    vertical-align: bottom;
+
+
+    .todoItemRowCell {
+      display: table-cell;
+      vertical-align: bottom;
+      width: 75%;
+      text-align:center;
+
+      &.fixed {
+        min-width: 60px;
+        width: 25%;
+        text-align: right;
+      }
+
+
+      p {
+        font-weight: normal;
+        color: #000000;
+        text-align: left;
+      }
+    }
+  }
+}
+
+
+.newTodo{
+  display: table;
+  vertical-align: bottom;
+  width: 100%;
+
+
+  .newTodoRow {
+
+    display: table-row;
+    width: 100%;
+    vertical-align: bottom;
+
+    .newTodoCell {
+      display: table-cell;
+      vertical-align: bottom;
+      text-align:center;
+      padding-right: 5px;
+
+      &.fixed {
+        width: 20px;
+        text-align: right;
+      }
+
+
+    }
+
+  }
+
+}
+
+
+.dropdown-menu {
+   min-width: 280px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+

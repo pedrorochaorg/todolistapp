@@ -1,0 +1,260 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+
+  </head>
+  <body ng-app="TodoList">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Todos</a>
+      </div>
+      <div class="collapse navbar-collapse">
+
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-plus"></span> </a>
+            <ul class="dropdown-menu">
+              <li>
+                <form name="todoForm" data-ng-controller="CreatetodoCtrl" data-ng-init="setup({id: '57f434eb3c878108a7fd7419',username: 'admin', password: '$2a$10$mQe4/LUVCsMZxoun4.H1hOOEDDaNbo3rpiA0qzLFVJlKYLJ1M1/8u',grupo: 'Verde'})">
+
+                <div class="newTodo">
+
+                  <div class="newTodoRow">
+                      <div class="newTodoCell">
+                        <input type="text" class="form-control" name="newTodo" data-ng-model="newTodo" value="" required/>
+                      </div>
+                      <div class="newTodoCell fixed">
+                        <button type="submit" class="btn btn-primary" data-ng-click="submitForm(newTodo)" data-ng-disabled="!todoForm.$valid"><span class="glyphicon glyphicon-plus"></span></button>
+                        <img src="images/preloader.gif" class="preloader small pull-right" data-ng-show="preloader" />
+                      </div>
+                  </div>
+                </div>
+                </form>
+
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav pull-right">
+          <li >
+            <a href=""><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <!-- Green Container Init -->
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " data-ng-controller="TodoListCtrl" data-ng-init="setup('Verde','Verde')">
+          <div class="panel panel-success">
+            <div class="panel-heading">Green <img src="images/preloader.gif" class="preloader small pull-right" data-ng-show="preloader" /></div>
+            <div class="panel-body align-center">
+
+              <div class="alert alert-success todoItem" data-ng-repeat="item in items" role="alert"  data-ng-show="items.length>0">
+
+                <div class="todoItemRow">
+                  <div class="todoItemRowCell">
+                    <p><strong>{{ item.user.username }}</strong> - {{ item.updated_at | date : "dd/MM/yyyy - hh:mm:ss" }}</p>
+                    <div class="wrapper">
+                      <p data-ng-class="{ 'hidden' : item.editStatus }">{{ item.text }} <strong data-ng-show="!item.status">Closed</strong></p>
+                      <input data-ng-class="{ 'hidden' : !item.editStatus }" type="text" name="todoText[]" class="form-control"  data-ng-model="item.text" >
+                    </div>
+
+                  </div>
+                  <div class="todoItemRowCell fixed">
+                    <div data-ng-show="item.editStatus">
+                      <button type="button" class="btn btn-success" data-ng-click="saveTodoItem(item)"><span class="glyphicon glyphicon-ok"></span></button>
+                      <button type="button" class="btn btn-danger" data-ng-click="cancelTodoItem(item)"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                    <div  data-ng-show="((!item.editStatus) && item.grupo==userGrupo)">
+
+                      <button type="button" class="btn btn-primary" data-ng-click="editTodoItem(item)" data-ng-show="item.status"><span class="glyphicon glyphicon-wrench"></span></button>
+                      <button type="button" class="btn btn-danger" data-ng-click="deleteTodoItem(item)"><span class="glyphicon glyphicon-trash"></span></button>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+              </div>
+
+
+            </div>
+          </div>
+
+          <script type="application/json" json-data data-ng-model="data">
+            [
+              {"id":"57f4383be77f4109e1433665","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Verde"},"text":"teste123","grupo":"Verde","status":false,"updated_at":"2016-10-04T23:16:11.995Z"},{"id":"57f437e9eea55a09b0b98fea","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Verde"},"text":"teste123","grupo":"Verde","status":true,"updated_at":"2016-10-04T23:14:49.249Z"},{"id":"57f437a8bc603d099848d8f7","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Verde"},"text":"teste123","grupo":"Verde","status":true,"updated_at":"2016-10-04T23:13:44.157Z"},{"id":"57f437998835c3098f1b37dd","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Verde"},"text":"teste123","grupo":"Verde","status":true,"updated_at":"2016-10-04T23:13:29.023Z"},{"id":"57f4378463559909741cbe6a","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Verde"},"text":"teste123","grupo":"Verde","status":true,"updated_at":"2016-10-04T23:13:08.407Z"}
+            ]
+          </script>
+
+
+        </div>
+        <!-- Green Container End -->
+
+        <!-- Blue Container Init -->
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " data-ng-controller="TodoListCtrl" data-ng-init="setup('Azul','Verde')">
+          <div class="panel panel-info">
+            <div class="panel-heading">Blue <img src="images/preloader.gif" class="preloader small pull-right" data-ng-show="preloader" /></div>
+            <div class="panel-body align-center">
+
+              <div class="alert alert-info todoItem" data-ng-repeat="item in items" role="alert" data-ng-show="items.length>0">
+
+                <div class="todoItemRow">
+                  <div class="todoItemRowCell">
+                    <p><strong>{{ item.user.username }}</strong> - {{ item.updated_at | date : "dd/MM/yyyy - hh:mm:ss" }}</p>
+                    <div class="wrapper">
+                      <p data-ng-class="{ 'hidden' : item.editStatus }">{{ item.text }} <strong data-ng-show="!item.status">Closed</strong></p>
+                      <input data-ng-class="{ 'hidden' : !item.editStatus }" type="text" name="todoText[]" class="form-control" value="{{ item.text }}">
+                    </div>
+
+                  </div>
+                  <div class="todoItemRowCell fixed">
+                    <div data-ng-show="item.editStatus">
+                      <button type="button" class="btn btn-success" data-ng-click="saveTodoItem(item)"><span class="glyphicon glyphicon-ok"></span></button>
+                      <button type="button" class="btn btn-danger" data-ng-click="cancelTodoItem(item)"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                    <div  data-ng-show="((!item.editStatus) && item.grupo==userGrupo)">
+
+                      <button type="button" class="btn btn-primary" data-ng-click="editTodoItem(item)" data-ng-show="item.status"><span class="glyphicon glyphicon-wrench"></span></button>
+                      <button type="button" class="btn btn-danger" data-ng-click="deleteTodoItem(item)"><span class="glyphicon glyphicon-trash"></span></button>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+              </div>
+
+
+            </div>
+          </div>
+          <script type="application/json" json-data data-ng-model="data">
+            [
+              {"id":"57f4383be77f4109e1433665","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Azul"},"text":"teste123","grupo":"Azul","status":false,"updated_at":"2016-10-04T23:16:11.995Z"},{"id":"57f437e9eea55a09b0b98fea","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Azul"},"text":"teste123","grupo":"Azul","status":true,"updated_at":"2016-10-04T23:14:49.249Z"},{"id":"57f437a8bc603d099848d8f7","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Azul"},"text":"teste123","grupo":"Azul","status":true,"updated_at":"2016-10-04T23:13:44.157Z"},{"id":"57f437998835c3098f1b37dd","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Azul"},"text":"teste123","grupo":"Azul","status":true,"updated_at":"2016-10-04T23:13:29.023Z"},{"id":"57f4378463559909741cbe6a","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Azul"},"text":"teste123","grupo":"Azul","status":true,"updated_at":"2016-10-04T23:13:08.407Z"}
+            ]
+          </script>
+        </div>
+        <!-- Blue Container End -->
+
+        <!-- Red Container Init -->
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" data-ng-controller="TodoListCtrl" data-ng-init="setup('Vermelho','Verde')">
+          <div class="panel panel-danger">
+            <div class="panel-heading">Red <img src="images/preloader.gif" class="preloader small pull-right" data-ng-show="preloader"  /></div>
+            <div class="panel-body align-center">
+
+              <div class="alert alert-danger todoItem" data-ng-repeat="item in items" role="alert" data-ng-show="items.length>0">
+
+                <div class="todoItemRow">
+                  <div class="todoItemRowCell">
+                    <p><strong>{{ item.user.username }}</strong> - {{ item.updated_at | date : "dd/MM/yyyy - hh:mm:ss" }}</p>
+                    <div class="wrapper">
+                      <p data-ng-class="{ 'hidden' : item.editStatus }">{{ item.text }} <strong data-ng-show="!item.status">Closed</strong></p>
+                      <input data-ng-class="{ 'hidden' : !item.editStatus }" type="text" name="todoText[]" class="form-control" value="{{ item.text }}">
+                    </div>
+
+                  </div>
+                  <div class="todoItemRowCell fixed">
+                    <div data-ng-show="item.editStatus">
+                      <button type="button" class="btn btn-success" data-ng-click="saveTodoItem(item)"><span class="glyphicon glyphicon-ok"></span></button>
+                      <button type="button" class="btn btn-danger" data-ng-click="cancelTodoItem(item)"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                    <div  data-ng-show="((!item.editStatus) && item.grupo==userGrupo)">
+
+                      <button type="button" class="btn btn-primary" data-ng-click="editTodoItem(item)" data-ng-show="item.status"><span class="glyphicon glyphicon-wrench"></span></button>
+                      <button type="button" class="btn btn-danger" data-ng-click="deleteTodoItem(item)"><span class="glyphicon glyphicon-trash"></span></button>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+              </div>
+
+            </div>
+          </div>
+          <script type="application/json" json-data data-ng-model="data">
+            [
+              {"id":"57f4383be77f4109e1433665","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Vermelho"},"text":"teste123","grupo":"Vermelho","status":false,"updated_at":"2016-10-04T23:16:11.995Z"},{"id":"57f437e9eea55a09b0b98fea","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Vermelho"},"text":"teste123","grupo":"Vermelho","status":true,"updated_at":"2016-10-04T23:14:49.249Z"},{"id":"57f437a8bc603d099848d8f7","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Vermelho"},"text":"teste123","grupo":"Vermelho","status":true,"updated_at":"2016-10-04T23:13:44.157Z"},{"id":"57f437998835c3098f1b37dd","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Vermelho"},"text":"teste123","grupo":"Vermelho","status":true,"updated_at":"2016-10-04T23:13:29.023Z"},{"id":"57f4378463559909741cbe6a","user":{"id":"57f434eb3c878108a7fd7419","username":"admin","grupo":"Vermelho"},"text":"teste123","grupo":"Vermelho","status":true,"updated_at":"2016-10-04T23:13:08.407Z"}
+            ]
+          </script>
+        </div>
+        <!-- Red Container End -->
+
+      </div>
+
+
+    </div>
+
+
+
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/todolist.js"></script>
+        <script src="scripts/directives/jsondata.js"></script>
+        <script src="scripts/services/apidata.js"></script>
+        <script src="scripts/services/socket.js"></script>
+        <script src="scripts/controllers/createtodo.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

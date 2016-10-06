@@ -1,0 +1,195 @@
+<% include header %>
+
+<!--[if lte IE 8]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Add your site or application content here -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">Todos</a>
+  </div>
+  <div class="collapse navbar-collapse">
+
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-plus"></span> </a>
+        <ul class="dropdown-menu">
+          <li>
+            <form name="todoForm" data-ng-controller="CreatetodoCtrl" data-ng-init="setup(<%- user %>)">
+
+              <div class="newTodo">
+
+                <div class="newTodoRow">
+                  <div class="newTodoCell">
+                    <input type="text" class="form-control" name="newTodo" data-ng-model="newTodo" value="" required/>
+                  </div>
+                  <div class="newTodoCell fixed">
+                    <button type="submit" class="btn btn-primary" data-ng-click="submitForm(newTodo)" data-ng-disabled="!todoForm.$valid"><span class="glyphicon glyphicon-plus"></span></button>
+                    <img src="/images/preloader.gif" class="preloader small pull-right" data-ng-show="preloader" />
+                  </div>
+                </div>
+              </div>
+            </form>
+
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav pull-right">
+      <li >
+        <a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Green Container Init -->
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " data-ng-controller="TodoListCtrl" data-ng-init="setup('Verde','<%- userGrupo %>')">
+      <div class="panel panel-success">
+        <div class="panel-heading">Green <img src="/images/preloader.gif" class="preloader small pull-right" data-ng-show="preloader" /></div>
+        <div class="panel-body align-center">
+
+          <div class="alert alert-success todoItem" data-ng-repeat="item in items" role="alert" data-ng-show="items.length>0">
+
+            <div class="todoItemRow">
+              <div class="todoItemRowCell">
+                <p><strong>{{ item.user.username }}</strong> - {{ item.updated_at | date : "dd/MM/yyyy - hh:mm:ss" }}</p>
+                <div class="wrapper">
+                  <p data-ng-class="{ 'hidden' : item.editStatus }">{{ item.text }} <strong data-ng-show="!item.status">Closed</strong></p>
+                  <input data-ng-class="{ 'hidden' : !item.editStatus }" type="text" name="todoText[]" class="form-control"  data-ng-model="item.text" >
+                </div>
+
+              </div>
+              <div class="todoItemRowCell fixed">
+                <div data-ng-show="item.editStatus">
+                  <button type="button" class="btn btn-success" data-ng-click="saveTodoItem(item)"><span class="glyphicon glyphicon-ok"></span></button>
+                  <button type="button" class="btn btn-danger" data-ng-click="cancelTodoItem(item)"><span class="glyphicon glyphicon-remove"></span></button>
+                </div>
+                <div  data-ng-show="((!item.editStatus) && item.grupo==userGrupo)">
+
+                  <button type="button" class="btn btn-primary" data-ng-click="editTodoItem(item)" data-ng-show="item.status"><span class="glyphicon glyphicon-wrench"></span></button>
+                  <button type="button" class="btn btn-danger" data-ng-click="deleteTodoItem(item)"><span class="glyphicon glyphicon-trash"></span></button>
+                </div>
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+
+        </div>
+      </div>
+
+      <script type="application/json" json-data data-ng-model="data">
+        <%- verdes %>
+      </script>
+
+
+    </div>
+    <!-- Green Container End -->
+
+    <!-- Blue Container Init -->
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " data-ng-controller="TodoListCtrl" data-ng-init="setup('Azul','<%- userGrupo %>')">
+      <div class="panel panel-info">
+        <div class="panel-heading">Blue <img src="/images/preloader.gif" class="preloader small pull-right" data-ng-show="preloader" /></div>
+        <div class="panel-body align-center">
+
+          <div class="alert alert-info todoItem" data-ng-repeat="item in items" role="alert" data-ng-show="items.length>0">
+
+            <div class="todoItemRow">
+              <div class="todoItemRowCell">
+                <p><strong>{{ item.user.username }}</strong> - {{ item.updated_at | date : "dd/MM/yyyy - hh:mm:ss" }}</p>
+                <div class="wrapper">
+                  <p data-ng-class="{ 'hidden' : item.editStatus }">{{ item.text }} <strong data-ng-show="!item.status">Closed</strong></p>
+                  <input data-ng-class="{ 'hidden' : !item.editStatus }" type="text" name="todoText[]" class="form-control" value="{{ item.text }}">
+                </div>
+
+              </div>
+              <div class="todoItemRowCell fixed">
+                <div data-ng-show="item.editStatus">
+                  <button type="button" class="btn btn-success" data-ng-click="saveTodoItem(item)"><span class="glyphicon glyphicon-ok"></span></button>
+                  <button type="button" class="btn btn-danger" data-ng-click="cancelTodoItem(item)"><span class="glyphicon glyphicon-remove"></span></button>
+                </div>
+                <div  data-ng-show="((!item.editStatus) && item.grupo==userGrupo)">
+
+                  <button type="button" class="btn btn-primary" data-ng-click="editTodoItem(item)" data-ng-show="item.status"><span class="glyphicon glyphicon-wrench"></span></button>
+                  <button type="button" class="btn btn-danger" data-ng-click="deleteTodoItem(item)"><span class="glyphicon glyphicon-trash"></span></button>
+                </div>
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+
+        </div>
+      </div>
+      <script type="application/json" json-data data-ng-model="data">
+        <%- azuis %>
+      </script>
+    </div>
+    <!-- Blue Container End -->
+
+    <!-- Red Container Init -->
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" data-ng-controller="TodoListCtrl" data-ng-init="setup('Vermelho','<%- userGrupo %>')">
+      <div class="panel panel-danger">
+        <div class="panel-heading">Red <img src="/images/preloader.gif" class="preloader small pull-right" data-ng-show="preloader"  /></div>
+        <div class="panel-body align-center">
+
+          <div class="alert alert-danger todoItem" data-ng-repeat="item in items" role="alert" data-ng-show="items.length>0">
+
+            <div class="todoItemRow">
+              <div class="todoItemRowCell">
+                <p><strong>{{ item.user.username }}</strong> - {{ item.updated_at | date : "dd/MM/yyyy - hh:mm:ss" }}</p>
+                <div class="wrapper">
+                  <p data-ng-class="{ 'hidden' : item.editStatus }">{{ item.text }} <strong data-ng-show="!item.status">Closed</strong></p>
+                  <input data-ng-class="{ 'hidden' : !item.editStatus }" type="text" name="todoText[]" class="form-control" value="{{ item.text }}">
+                </div>
+
+              </div>
+              <div class="todoItemRowCell fixed">
+                <div data-ng-show="item.editStatus">
+                  <button type="button" class="btn btn-success" data-ng-click="saveTodoItem(item)"><span class="glyphicon glyphicon-ok"></span></button>
+                  <button type="button" class="btn btn-danger" data-ng-click="cancelTodoItem(item)"><span class="glyphicon glyphicon-remove"></span></button>
+                </div>
+                <div  data-ng-show="((!item.editStatus) && item.grupo==userGrupo)">
+
+                  <button type="button" class="btn btn-primary" data-ng-click="editTodoItem(item)" data-ng-show="item.status"><span class="glyphicon glyphicon-wrench"></span></button>
+                  <button type="button" class="btn btn-danger" data-ng-click="deleteTodoItem(item)"><span class="glyphicon glyphicon-trash"></span></button>
+                </div>
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+        </div>
+      </div>
+      <script type="application/json" json-data data-ng-model="data">
+        <%- vermelhos %>
+      </script>
+    </div>
+    <!-- Red Container End -->
+
+  </div>
+
+
+</div>
+
+<% include footer %>
