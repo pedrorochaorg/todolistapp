@@ -124,6 +124,11 @@ And finaly open the following url in your browser
 
  - [http://localhost:3000][localhost]
 
+Sample Login Credentials:
+
+ - Username: admin;
+ - Password: zaq123wsx;
+
 Please notice that your firewall may block this communication, allow communications on the port 3000.
 
 
